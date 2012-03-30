@@ -8,7 +8,7 @@ import org.apache.commons.cli.*;
  *
  * @author Sebastien Roux @mail roux.sebastien@gmail.com
  *
- * The MIT License Copyright (c) 2010 Sébastien Roux
+ * The MIT License Copyright (c) 2010-2012 Sébastien Roux
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
