@@ -40,14 +40,13 @@ import java.util.regex.Pattern;
 
 public class GetMaxlFilters {
 
-    private static String essUsr = "admin";
-    private static String essPwd = "password";
-    private static String essSvr = "localhost";
-    static String essProvider = "http://" + essSvr + ":13080/aps/JAPI";
+    private static String essUsr;
+    private static String essPwd;
+    private static String essSvr;
+    private static String essProvider;
+    private static String essApp;
+    private static String essDb;
     private static final int FAILURE_CODE = 1;
-    private static String essApp = "";
-    private static String essDb = "";
-    private static final String NOT_ASSIGNED = "NOT ASSIGNED";
 
     public static String getEssApp() {
         return essApp;
