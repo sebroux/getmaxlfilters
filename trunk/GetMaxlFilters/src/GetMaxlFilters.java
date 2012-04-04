@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
  * Get and format Essbase filter as a Maxl create-replace statement command
  *
  * @author Sebastien Roux @mail roux.sebastien@gmail.com
- * 
- * @version 1.2
+ *
+ * @version 1.3
  *
  * The MIT License Copyright (c) 2012 Sébastien Roux
  *
@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 public class GetMaxlFilters {
 
     private static String essUsr;
@@ -48,7 +47,16 @@ public class GetMaxlFilters {
     private static String essProvider;
     private static String essApp = "";
     private static String essDb = "";
+    private static String essFilter = "";
     private static final int FAILURE_CODE = 1;
+
+    public static String getEssFilter() {
+        return essFilter;
+    }
+
+    public static void setEssFilter(String essFilter) {
+        GetMaxlFilters.essFilter = essFilter;
+    }
 
     public static String getEssApp() {
         return essApp;
@@ -172,49 +180,57 @@ public class GetMaxlFilters {
                             // Loop through filters 
                             for (int k = 0; k < dbFilter.getCount(); k++) {
 
-                                //Array to join filter rows
-                                ArrayList maxlFilter = new ArrayList();
+                                // Match specified filter
+                                boolean checkFilter = Pattern.matches(".*" + essFilter.toLowerCase() + ".*", dbFilter.getAt(k).toString().toLowerCase());
 
-                                // Get filter content 
-                                IEssSecurityFilter filter = (IEssSecurityFilter) dbFilter.getAt(k);
-                                IEssCube.IEssSecurityFilter.IEssFilterRow filterRow = filter.getFilterRow();
+                                // For specified filter 
+                                if (checkFilter == true) {
 
-                                // Print maxl filter "prefix"
-                                System.out.println(
-                                        "create or replace filter "
-                                        + "'" + app.getName() + "'.'"
-                                        + db.getName() + "'.'"
-                                        + filter.getName() + "'");
+                                    //Array to join filter rows
+                                    ArrayList maxlFilter = new ArrayList();
 
-                                // Get filter rows
-                                while (filterRow.getRowString() != null) {
+                                    // Get filter content 
+                                    IEssSecurityFilter filter = (IEssSecurityFilter) dbFilter.getAt(k);
+                                    IEssCube.IEssSecurityFilter.IEssFilterRow filterRow = filter.getFilterRow();
 
-                                    // Add each filter row into array
-                                    maxlFilter.add(" " + getAccessLabel(filterRow.getAccess())
-                                            + " on '" + filterRow.getRowString() + "'");
+                                    // Print maxl filter "prefix"
+                                    System.out.println(
+                                            "create or replace filter "
+                                            + "'" + app.getName() + "'.'"
+                                            + db.getName() + "'.'"
+                                            + filter.getName() + "'");
 
-                                    filterRow = filter.getFilterRow();
-                                }
+                                    // Get filter rows
+                                    while (filterRow.getRowString() != null) {
 
-                                // Build Maxl filter
-                                for (int l = 0; l < maxlFilter.size(); l++) {
-                                    if (l < maxlFilter.size()) {
-                                        System.out.println(maxlFilter.get(l) + ",");
-                                    } else {
-                                        System.out.println(maxlFilter.get(l));
+                                        // Add each filter row into array
+                                        maxlFilter.add(" " + getAccessLabel(filterRow.getAccess())
+                                                + " on '" + filterRow.getRowString() + "'");
+
+                                        filterRow = filter.getFilterRow();
                                     }
-                                }
 
-                                /*
-                                 * Add last option.
-                                 * Updates the filter definition while retaining
-                                 * user associations with the filter. If you
-                                 * replace a filter without using
-                                 * definition_only, then the filter must be
-                                 * re-granted to any users or group to whom it
-                                 * was assigned (ref. Essbase technical reference).
-                                 */
-                                System.out.println(" definition_only;\n");
+                                    // Build Maxl filter
+                                    for (int l = 0; l < maxlFilter.size(); l++) {
+                                        if (l < maxlFilter.size()) {
+                                            System.out.println(maxlFilter.get(l) + ",");
+                                        } else {
+                                            System.out.println(maxlFilter.get(l));
+                                        }
+                                    }
+
+                                    /*
+                                     * Add last option. Updates the filter
+                                     * definition while retaining user
+                                     * associations with the filter. If you
+                                     * replace a filter without using
+                                     * definition_only, then the filter must be
+                                     * re-granted to any users or group to whom
+                                     * it was assigned (ref. Essbase technical
+                                     * reference).
+                                     */
+                                    System.out.println(" definition_only;\n");
+                                }
                             }
                         }
                     }
