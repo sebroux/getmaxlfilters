@@ -72,6 +72,10 @@ public class CLI {
         Option database = OptionBuilder.withArgName("database").withLongOpt("essdb").hasArg().withDescription("database name (optional)").create("d");
         options.addOption(database);
 
+        // add filter option
+        Option filter = OptionBuilder.withArgName("filter").withLongOpt("essfilter").hasArg().withDescription("filter name (optional)").create("f");
+        options.addOption(filter);
+        
         // add help option
         Option help = OptionBuilder.withArgName("help").withLongOpt("help").withDescription("display this help").create("h");
         options.addOption(help);
@@ -117,12 +121,17 @@ public class CLI {
 
             //Application
             if (cmd.hasOption("a")) {
-                getmaxlfilters.setEssSvr(cmd.getOptionValue("a"));
+                getmaxlfilters.setEssApp(cmd.getOptionValue("a"));
             } 
             
             //Database
             if (cmd.hasOption("d")) {
-                getmaxlfilters.setEssSvr(cmd.getOptionValue("d"));
+                getmaxlfilters.setEssDb(cmd.getOptionValue("d"));
+            } 
+            
+            //Filter
+            if (cmd.hasOption("f")) {
+                getmaxlfilters.setEssFilter(cmd.getOptionValue("f"));
             } 
 
             //Provider url if different or specific server
