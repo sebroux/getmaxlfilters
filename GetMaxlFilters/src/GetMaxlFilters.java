@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
  * Get and format Essbase filter as a Maxl create-replace statement command
  *
  * @author Sebastien Roux @mail roux.sebastien@gmail.com
+ * 
+ * @version 1.2
  *
  * The MIT License Copyright (c) 2012 Sébastien Roux
  *
@@ -44,8 +46,8 @@ public class GetMaxlFilters {
     private static String essPwd;
     private static String essSvr;
     private static String essProvider;
-    private static String essApp;
-    private static String essDb;
+    private static String essApp = "";
+    private static String essDb = "";
     private static final int FAILURE_CODE = 1;
 
     public static String getEssApp() {

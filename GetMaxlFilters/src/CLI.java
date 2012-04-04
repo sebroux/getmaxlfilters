@@ -1,4 +1,3 @@
-
 import org.apache.commons.cli.*;
 
 /**
@@ -115,6 +114,16 @@ public class CLI {
                 System.out.println("Please specify an Essbase server!");
                 displayHelp(options);
             }
+
+            //Application
+            if (cmd.hasOption("a")) {
+                getmaxlfilters.setEssSvr(cmd.getOptionValue("a"));
+            } 
+            
+            //Database
+            if (cmd.hasOption("d")) {
+                getmaxlfilters.setEssSvr(cmd.getOptionValue("d"));
+            } 
 
             //Provider url if different or specific server
             getmaxlfilters.setEssProvider(cmd.getOptionValue("v"));
