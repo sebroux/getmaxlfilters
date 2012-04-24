@@ -17,9 +17,9 @@ import java.util.regex.Pattern;
  *
  * @author Sebastien Roux @mail roux.sebastien@gmail.com
  *
- * @version 1.3
+ * @version 1.4
  *
- * The MIT License Copyright (c) 2012 Sébastien Roux
+ * The MIT License Copyright (c) 2010-2012 Sébastien Roux
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -212,7 +212,7 @@ public class GetMaxlFilters {
 
                                     // Build Maxl filter
                                     for (int l = 0; l < maxlFilter.size(); l++) {
-                                        if (l < maxlFilter.size()) {
+                                        if (l < maxlFilter.size() - 1) {
                                             System.out.println(maxlFilter.get(l) + ",");
                                         } else {
                                             System.out.println(maxlFilter.get(l));
