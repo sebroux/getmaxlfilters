@@ -61,7 +61,7 @@ public class CLI {
         options.addOption(server);
 
         // add provider url option
-        Option provider = OptionBuilder.withArgName("http://ProviderServer:port/aps/JAPI").withLongOpt("essaps").hasArg().withDescription("Provider server URL (optional) - if not specified default URL is used http://EssbaseServer:13080/aps/JAPI").create("v");
+        Option provider = OptionBuilder.withArgName("http://ProviderServer:port/aps/JAPI").withLongOpt("essaps").hasArg().withDescription("Provider server URL (optional) - if not specified default URL is used http://<server>:13080/aps/JAPI").create("v");
         options.addOption(provider);
 
         // add application option
@@ -154,7 +154,7 @@ public class CLI {
 
         final String HELP_REQU = "REQUIREMENTS:\n" + "JRE 1.5 or higher (current JRE version: " + JavaVersionDisplayApplet() + ")\n";
 
-        final String HELP_VERS = "VERSION:\n" + "version 1.0 2012\n";
+        final String HELP_VERS = "VERSION:\n" + "version 1.4 2012\n";
 
         final String HELP_AUTH = "AUTHOR:\n" + "Sebastien Roux <roux.sebastien@gmail.com>\n";
 

@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  *
  * @author Sebastien Roux @mail roux.sebastien@gmail.com
  *
- * @version 1.4
+ * @version 1.4.1
  *
  * The MIT License Copyright (c) 2010-2012 Sébastien Roux
  *
@@ -102,7 +102,7 @@ public class GetMaxlFilters {
         return essProvider;
     }
 
-    public static void setEssProvider(String essPwd) {
+    public static void setEssProvider(String essProvider) {
         if (essProvider == null) {
             // Default provider (APS) path
             GetMaxlFilters.essProvider = "http://" + getEssSvr() + ":13080/aps/JAPI";
