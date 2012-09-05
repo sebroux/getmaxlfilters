@@ -256,7 +256,7 @@ public class GetMaxlFilters {
                 access = "write";
                 break;
             case 280:
-                access = "metaread";
+                access = "meta_read";
                 break;
         }
         return access;
